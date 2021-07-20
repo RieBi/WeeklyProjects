@@ -10,11 +10,11 @@ namespace FirstProject.MathildaRevenue
     static class Data
     {
         public static readonly string TempFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\RieBi\Temp";
-        static string FileFolder = null;
+        public static string FileFolder { get; set; } = null;
 
-        static List<int> TotalMoney = null;
-        static List<int> CupcakesBasic = null;
-        static List<int> CupcakesDelux = null;
+        public static List<int> TotalMoney { get; set; } = null;
+        public static List<int> CupcakesBasic { get; set; } = null;
+        public static List<int> CupcakesDelux { get; set; } = null;
 
         public static void LoadFromZip(string path)
         {
@@ -46,12 +46,14 @@ namespace FirstProject.MathildaRevenue
                 TotalMoney = ParseFile(@$"{FileFolder}\Total.txt");
                 CupcakesBasic = ParseFile(@$"{FileFolder}\Basic.txt");
                 CupcakesDelux = ParseFile(@$"{FileFolder}\Delux.txt");
+                TotalMoney.Reverse();
+                CupcakesBasic.Reverse();
+                CupcakesDelux.Reverse();
             }
-            /*catch (IOException)
+            catch (IOException)
             {
                 throw new IOException("Files data is in incorrect format");
-            }*/
-            finally { }
+            }
 
         }
         public static void UnLoad()
