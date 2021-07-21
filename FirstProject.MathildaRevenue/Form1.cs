@@ -93,7 +93,9 @@ namespace FirstProject.MathildaRevenue
 
             // Changing chart series
             DataChart.Series[0] = Data.DataSeries[index];
-            DataChart.Series[0].ChartArea = DataChart.ChartAreas[0].Name;
+            var area = DataChart.ChartAreas[0];
+            area.AxisY.Maximum = DataChart.Series[0].Points.Max((dp) => dp.YValues[0]) * 1.2;
+
         }
     }
 }

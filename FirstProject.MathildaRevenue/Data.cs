@@ -88,7 +88,7 @@ namespace FirstProject.MathildaRevenue
                 {
                     series.Points.Add(new DataPoint(i + 1, list[i]));
                 }
-                series.ChartType = SeriesChartType.Column;
+                series.ChartType = SeriesChartType.Line;
                 return series;
             }
             const int ChartLengthInDays = 365;
