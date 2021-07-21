@@ -33,6 +33,9 @@ namespace FirstProject.MathildaRevenue
             this.ChartPanel = new System.Windows.Forms.Panel();
             this.ComboBoxChartType = new System.Windows.Forms.ComboBox();
             this.LabelChartType = new System.Windows.Forms.Label();
+            this.ComboBoxChartInterval = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.LabelChartInterval = new System.Windows.Forms.Label();
             this.ChartPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,11 +80,47 @@ namespace FirstProject.MathildaRevenue
             this.LabelChartType.TabIndex = 3;
             this.LabelChartType.Text = "Chart type";
             // 
+            // ComboBoxChartInterval
+            // 
+            this.ComboBoxChartInterval.FormattingEnabled = true;
+            this.ComboBoxChartInterval.Items.AddRange(new object[] {
+            "Last 12 months (Year)",
+            "Last 52 weeks (Year)",
+            "Last 30 days (Month)",
+            "Last 7 days (Week)"});
+            this.ComboBoxChartInterval.Location = new System.Drawing.Point(207, 33);
+            this.ComboBoxChartInterval.Name = "ComboBoxChartInterval";
+            this.ComboBoxChartInterval.Size = new System.Drawing.Size(121, 23);
+            this.ComboBoxChartInterval.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(218, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 21);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Time interval";
+            // 
+            // LabelChartInterval
+            // 
+            this.LabelChartInterval.AutoSize = true;
+            this.LabelChartInterval.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelChartInterval.Location = new System.Drawing.Point(218, 9);
+            this.LabelChartInterval.Name = "LabelChartInterval";
+            this.LabelChartInterval.Size = new System.Drawing.Size(100, 21);
+            this.LabelChartInterval.TabIndex = 5;
+            this.LabelChartInterval.Text = "Time interval";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.LabelChartInterval);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ComboBoxChartInterval);
             this.Controls.Add(this.LabelChartType);
             this.Controls.Add(this.ComboBoxChartType);
             this.Controls.Add(this.ChartPanel);
@@ -101,6 +140,9 @@ namespace FirstProject.MathildaRevenue
         private System.Windows.Forms.Panel ChartPanel;
         private System.Windows.Forms.ComboBox ComboBoxChartType;
         private System.Windows.Forms.Label LabelChartType;
+        private System.Windows.Forms.ComboBox ComboBoxChartInterval;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LabelChartInterval;
     }
 }
 

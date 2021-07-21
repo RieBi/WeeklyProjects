@@ -33,7 +33,8 @@ namespace FirstProject.MathildaRevenue
         public void InitializeEvents()
         {
             FormClosing += (o, e) => Data.UnLoad();
-            ComboBoxChartType.TextChanged += (o, e) => OnComboBoxTextChanged(ComboBoxChartType);
+            ComboBoxChartType.TextChanged += (o, e) => OnChartComboBoxTextChanged();
+            ComboBoxChartInterval.TextChanged += (o, e) => OnChartComboBoxTextChanged();
         }
         public void InitializeControls()
         {
@@ -58,6 +59,7 @@ namespace FirstProject.MathildaRevenue
             area.AxisX.Title = "Time (From Now)";
             area.AxisY.Title = "Amount";
 
+            chart.Tag = -1;
             return chart;
         }
         public bool OpenDataFile()
@@ -79,23 +81,95 @@ namespace FirstProject.MathildaRevenue
                 return false;
             }
         }
-        public void OnComboBoxTextChanged(ComboBox box)
+        public void OnChartComboBoxTextChanged()
         {
-            if (!box.Items.Contains(box.Text))
+            var typeBox = ComboBoxChartType;
+            int typeBoxIndex = typeBox.SelectedIndex;
+            var intervalBox = ComboBoxChartInterval;
+            int intervalBoxIndex = intervalBox.SelectedIndex;
+            // Changing index to 0 if text is invalid
+            if (!typeBox.Items.Contains(typeBox.Text))
             {
-                box.SelectedIndex = 0;
+                typeBox.SelectedIndex = 0;
             }
-            int index = box.SelectedIndex;
-            if (DataChart.Series[0] == Data.DataSeries[index])
+            if (!intervalBox.Items.Contains(intervalBox.Text))
             {
-                return;
+                intervalBox.SelectedIndex = 0;
             }
 
             // Changing chart series
-            DataChart.Series[0] = Data.DataSeries[index];
-            var area = DataChart.ChartAreas[0];
-            area.AxisY.Maximum = DataChart.Series[0].Points.Max((dp) => dp.YValues[0]) * 1.2;
+            if (DataChart.Series[0].Name != Data.DataSeries[typeBoxIndex].Name || (int)DataChart.Tag != intervalBoxIndex)
+            {
+                var seriesBase = Data.DataSeries[typeBoxIndex];
+                DataChart.Tag = intervalBoxIndex;
 
+                // Creating new series
+                switch (intervalBoxIndex)
+                {
+                    // Last 12 months
+                    case 0:
+                        DataChart.Series[0] = CreateChunkedSeriesFromSeries(seriesBase, 365, 12);
+                        break;
+                    // Last 52 weeks
+                    case 1:
+                        DataChart.Series[0] = CreateChunkedSeriesFromSeries(seriesBase, 365, 52);
+                        break;
+                    // Last 30 days
+                    case 2:
+                        DataChart.Series[0] = CreateChunkedSeriesFromSeries(seriesBase, 30, 30);
+                        break;
+                    // Last 7 days
+                    case 3:
+                        DataChart.Series[0] = CreateChunkedSeriesFromSeries(seriesBase, 7, 7);
+                        break;
+                }
+
+                var area = DataChart.ChartAreas[0];
+                area.AxisY.Maximum = DataChart.Series[0].Points.Max((dp) => dp.YValues[0]) * 1.2;
+            }
+        }
+        public static Series CreateChunkedSeriesFromSeries(Series fill, int length, int parts)
+        {
+            var list = fill.Points.Select((dp) => dp.YValues[0]).ToList();
+            if (list.Count < length)
+            {
+                length = list.Count / parts * parts;
+            }
+            else if (list.Count > length)
+            {
+                list = list.GetRange(0, length);
+            }
+
+            List<double> values;
+            if (length == parts)
+            {
+                values = list;
+            }
+            else
+            {
+                values = (from l in list.Split(parts) select l.Sum()).ToList();
+            }
+
+            Series series = new Series(fill.Name)
+            {
+                ChartType = fill.ChartType
+            };
+            for (int i = 0; i < values.Count; i++)
+            {
+                series.Points.Add(new DataPoint(i + 1, values[i]));
+            }
+            return series;
+        }
+    }
+    public static class Extensions
+    {
+        public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> list, int parts)
+        {
+            int i = 0;
+            var splits = from item in list
+                         group item by i++ % parts into part
+                         select part.AsEnumerable();
+            return splits;
         }
     }
 }

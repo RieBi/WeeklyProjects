@@ -95,6 +95,9 @@ namespace FirstProject.MathildaRevenue
             DataSeries[0] = CreateSeries(TotalMoney, ChartLengthInDays);
             DataSeries[1] = CreateSeries(CupcakesBasic, ChartLengthInDays);
             DataSeries[2] = CreateSeries(CupcakesDelux, ChartLengthInDays);
+            DataSeries[0].Name = "Money";
+            DataSeries[1].Name = "Basic";
+            DataSeries[2].Name = "Delux";
         }
     }
 }
