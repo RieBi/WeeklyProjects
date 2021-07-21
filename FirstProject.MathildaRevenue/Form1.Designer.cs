@@ -36,6 +36,9 @@ namespace FirstProject.MathildaRevenue
             this.ComboBoxChartInterval = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.LabelChartInterval = new System.Windows.Forms.Label();
+            this.LabelYearlyTotalMoney = new System.Windows.Forms.Label();
+            this.LabelMontlyTotalMoney = new System.Windows.Forms.Label();
+            this.LabelWeeklyTotalMoney = new System.Windows.Forms.Label();
             this.ChartPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,11 +116,44 @@ namespace FirstProject.MathildaRevenue
             this.LabelChartInterval.TabIndex = 5;
             this.LabelChartInterval.Text = "Time interval";
             // 
+            // LabelYearlyTotalMoney
+            // 
+            this.LabelYearlyTotalMoney.AutoSize = true;
+            this.LabelYearlyTotalMoney.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelYearlyTotalMoney.Location = new System.Drawing.Point(390, 35);
+            this.LabelYearlyTotalMoney.Name = "LabelYearlyTotalMoney";
+            this.LabelYearlyTotalMoney.Size = new System.Drawing.Size(161, 21);
+            this.LabelYearlyTotalMoney.TabIndex = 6;
+            this.LabelYearlyTotalMoney.Text = "Yearly revenue totals: ";
+            // 
+            // LabelMontlyTotalMoney
+            // 
+            this.LabelMontlyTotalMoney.AutoSize = true;
+            this.LabelMontlyTotalMoney.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelMontlyTotalMoney.Location = new System.Drawing.Point(640, 9);
+            this.LabelMontlyTotalMoney.Name = "LabelMontlyTotalMoney";
+            this.LabelMontlyTotalMoney.Size = new System.Drawing.Size(168, 21);
+            this.LabelMontlyTotalMoney.TabIndex = 7;
+            this.LabelMontlyTotalMoney.Text = "Montly revenue totals: ";
+            // 
+            // LabelWeeklyTotalMoney
+            // 
+            this.LabelWeeklyTotalMoney.AutoSize = true;
+            this.LabelWeeklyTotalMoney.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelWeeklyTotalMoney.Location = new System.Drawing.Point(639, 35);
+            this.LabelWeeklyTotalMoney.Name = "LabelWeeklyTotalMoney";
+            this.LabelWeeklyTotalMoney.Size = new System.Drawing.Size(169, 21);
+            this.LabelWeeklyTotalMoney.TabIndex = 8;
+            this.LabelWeeklyTotalMoney.Text = "Weekly revenue totals: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.LabelWeeklyTotalMoney);
+            this.Controls.Add(this.LabelMontlyTotalMoney);
+            this.Controls.Add(this.LabelYearlyTotalMoney);
             this.Controls.Add(this.LabelChartInterval);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ComboBoxChartInterval);
@@ -143,6 +179,9 @@ namespace FirstProject.MathildaRevenue
         private System.Windows.Forms.ComboBox ComboBoxChartInterval;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LabelChartInterval;
+        private System.Windows.Forms.Label LabelYearlyTotalMoney;
+        private System.Windows.Forms.Label LabelMontlyTotalMoney;
+        private System.Windows.Forms.Label LabelWeeklyTotalMoney;
     }
 }
 

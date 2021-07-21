@@ -28,7 +28,9 @@ namespace FirstProject.MathildaRevenue
 
             // Try to open data file till the data is in correct format
             while (!OpenDataFile()) { };
+
             InitializeControls();
+            FillRevenueLabels();
         }
         public void InitializeEvents()
         {
@@ -134,6 +136,20 @@ namespace FirstProject.MathildaRevenue
                 area.AxisY.Interval = RoundInt((maximum - minimum) / 10, false);
                 area.AxisY.IntervalAutoMode = IntervalAutoMode.FixedCount;
 
+            }
+        }
+        public void FillRevenueLabels()
+        {
+            try
+            {
+                LabelYearlyTotalMoney.Text += Data.TotalMoney.GetRange(0, 365).Sum();
+                LabelMontlyTotalMoney.Text += Data.TotalMoney.GetRange(0, 30).Sum();
+                LabelWeeklyTotalMoney.Text += Data.TotalMoney.GetRange(0, 7).Sum();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Failed to calculate revenue totals." +
+                    " Please make sure your data file's length contains at least 365 records.", "Error");
             }
         }
         public static int RoundInt(int num, bool zero = true)
