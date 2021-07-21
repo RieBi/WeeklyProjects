@@ -125,8 +125,31 @@ namespace FirstProject.MathildaRevenue
                 }
 
                 var area = DataChart.ChartAreas[0];
-                area.AxisY.Maximum = DataChart.Series[0].Points.Max((dp) => dp.YValues[0]) * 1.2;
+                int maximum = (int)(DataChart.Series[0].Points.Max((dp) => dp.YValues[0]) * 1.2);
+                int minimum = (int)(DataChart.Series[0].Points.Min((dp) => dp.YValues[0]) / 1.2);
+                minimum = RoundInt(minimum);
+
+                area.AxisY.Maximum = maximum;
+                area.AxisY.Minimum = minimum;
+                area.AxisY.Interval = RoundInt((maximum - minimum) / 10, false);
+                area.AxisY.IntervalAutoMode = IntervalAutoMode.FixedCount;
+
             }
+        }
+        public static int RoundInt(int num, bool zero = true)
+        {
+            int result;
+            if (num < 10 && zero)
+            {
+                result = 0;
+            }
+            else
+            {
+                int mult = num.ToString().Length - 1;
+                mult = (int)Math.Pow(10, mult);
+                result = num / mult * mult;
+            }
+            return result;
         }
         public static Series CreateChunkedSeriesFromSeries(Series fill, int length, int parts)
         {
