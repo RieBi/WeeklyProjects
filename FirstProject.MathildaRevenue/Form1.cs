@@ -15,6 +15,7 @@ namespace FirstProject.MathildaRevenue
     public partial class Form1 : Form
     {
         public static Form MainForm;
+        private Chart DataChart;
         public Form1()
         {
             InitializeComponent();
@@ -27,13 +28,21 @@ namespace FirstProject.MathildaRevenue
 
             // Try to open data file till the data is in correct format
             while (!OpenDataFile()) { };
-            var ch = CreateChart(FillChartTotalMoney, Data.TotalMoney);
-            ChartPanel.Controls.Add(ch);
+            InitializeControls();
         }
         public void InitializeEvents()
         {
             FormClosing += (o, e) => Data.UnLoad();
             ComboBoxChartType.TextChanged += (o, e) => OnComboBoxTextChanged(ComboBoxChartType);
+        }
+        public void InitializeControls()
+        {
+            // Chart
+            DataChart = CreateChart(FillChartTotalMoney, Data.TotalMoney);
+            ChartPanel.Controls.Add(DataChart);
+
+            // Combo boxes
+            ComboBoxChartType.SelectedIndex = 0;
         }
         public Chart CreateChart(Control fill, List<int> list)
         {
@@ -43,7 +52,7 @@ namespace FirstProject.MathildaRevenue
                 Size = fill.Size,
                 BackColor = fill.BackColor
             };
-            chart.Series.Add(Data.TotalMoneySeries);
+            chart.Series.Add(Data.DataSeries[0]);
             var area = chart.ChartAreas.Add("ChartArea");
             chart.Series[0].ChartArea = area.Name;
             area.AxisX.Title = "Time (From Now)";
@@ -76,6 +85,15 @@ namespace FirstProject.MathildaRevenue
             {
                 box.SelectedIndex = 0;
             }
+            int index = box.SelectedIndex;
+            if (DataChart.Series[0] == Data.DataSeries[index])
+            {
+                return;
+            }
+
+            // Changing chart series
+            DataChart.Series[0] = Data.DataSeries[index];
+            DataChart.Series[0].ChartArea = DataChart.ChartAreas[0].Name;
         }
     }
 }

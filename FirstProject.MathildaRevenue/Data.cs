@@ -16,9 +16,7 @@ namespace FirstProject.MathildaRevenue
         public static List<int> TotalMoney { get; set; } = null;
         public static List<int> CupcakesBasic { get; set; } = null;
         public static List<int> CupcakesDelux { get; set; } = null;
-        public static Series TotalMoneySeries { get; set; }
-        public static Series CupcakesBasicSeries { get; set; }
-        public static Series CupcakesDeluxSeries { get; set; }
+        public static Series[] DataSeries { get; set; } = new Series[3];
 
 
         public static void LoadFromZip(string path)
@@ -94,9 +92,9 @@ namespace FirstProject.MathildaRevenue
                 return series;
             }
             const int ChartLengthInDays = 365;
-            TotalMoneySeries = CreateSeries(TotalMoney, ChartLengthInDays);
-            CupcakesBasicSeries = CreateSeries(CupcakesBasic, ChartLengthInDays);
-            CupcakesDeluxSeries = CreateSeries(CupcakesDelux, ChartLengthInDays);
+            DataSeries[0] = CreateSeries(TotalMoney, ChartLengthInDays);
+            DataSeries[1] = CreateSeries(CupcakesBasic, ChartLengthInDays);
+            DataSeries[2] = CreateSeries(CupcakesDelux, ChartLengthInDays);
         }
     }
 }

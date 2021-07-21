@@ -62,7 +62,7 @@ namespace FirstProject.MathildaRevenue
             "Total money",
             "Basic cupcakes",
             "Delux cupcakes"});
-            this.ComboBoxChartType.Location = new System.Drawing.Point(63, 36);
+            this.ComboBoxChartType.Location = new System.Drawing.Point(80, 33);
             this.ComboBoxChartType.Name = "ComboBoxChartType";
             this.ComboBoxChartType.Size = new System.Drawing.Size(121, 23);
             this.ComboBoxChartType.TabIndex = 2;
@@ -71,7 +71,7 @@ namespace FirstProject.MathildaRevenue
             // 
             this.LabelChartType.AutoSize = true;
             this.LabelChartType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelChartType.Location = new System.Drawing.Point(80, 12);
+            this.LabelChartType.Location = new System.Drawing.Point(99, 9);
             this.LabelChartType.Name = "LabelChartType";
             this.LabelChartType.Size = new System.Drawing.Size(82, 21);
             this.LabelChartType.TabIndex = 3;
