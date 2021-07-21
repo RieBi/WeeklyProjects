@@ -24,12 +24,16 @@ namespace FirstProject.MathildaRevenue
         {
             MainForm = this;
             InitializeEvents();
-            this.Activate();
 
             // Try to open data file till the data is in correct format
             while (!OpenDataFile()) { };
             var ch = CreateChart(FillChartTotalMoney, Data.TotalMoney);
             ChartPanel.Controls.Add(ch);
+        }
+        public void InitializeEvents()
+        {
+            FormClosing += (o, e) => Data.UnLoad();
+            ComboBoxChartType.TextChanged += (o, e) => OnComboBoxTextChanged(ComboBoxChartType);
         }
         public Chart CreateChart(Control fill, List<int> list)
         {
@@ -39,22 +43,13 @@ namespace FirstProject.MathildaRevenue
                 Size = fill.Size,
                 BackColor = fill.BackColor
             };
-            var ser = chart.Series.Add("Series");
+            chart.Series.Add(Data.TotalMoneySeries);
             var area = chart.ChartAreas.Add("ChartArea");
-            ser.ChartType = SeriesChartType.Column;
-            ser.ChartArea = area.Name;
-            area.AxisX.Title = "My lovely axis";
+            chart.Series[0].ChartArea = area.Name;
+            area.AxisX.Title = "Time (From Now)";
+            area.AxisY.Title = "Amount";
 
-            // Filling the chart
-            for (int i = 0; i < 365; i++)
-            {
-                ser.Points.Add(new DataPoint(i + 1, list[i]));
-            }
             return chart;
-        }
-        public void InitializeEvents()
-        {
-            FormClosing += (o, e) => Data.UnLoad();
         }
         public bool OpenDataFile()
         {
@@ -73,6 +68,13 @@ namespace FirstProject.MathildaRevenue
             {
                 MessageBox.Show($"An error occured: [{exc.Message}]. Please, try again.", "Error");
                 return false;
+            }
+        }
+        public void OnComboBoxTextChanged(ComboBox box)
+        {
+            if (!box.Items.Contains(box.Text))
+            {
+                box.SelectedIndex = 0;
             }
         }
     }

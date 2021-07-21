@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace FirstProject.MathildaRevenue
 {
@@ -15,6 +16,10 @@ namespace FirstProject.MathildaRevenue
         public static List<int> TotalMoney { get; set; } = null;
         public static List<int> CupcakesBasic { get; set; } = null;
         public static List<int> CupcakesDelux { get; set; } = null;
+        public static Series TotalMoneySeries { get; set; }
+        public static Series CupcakesBasicSeries { get; set; }
+        public static Series CupcakesDeluxSeries { get; set; }
+
 
         public static void LoadFromZip(string path)
         {
@@ -54,7 +59,11 @@ namespace FirstProject.MathildaRevenue
             {
                 throw new IOException("Files data is in incorrect format");
             }
-
+            Load();
+        }
+        static void Load()
+        {
+            InitializeSeries();
         }
         public static void UnLoad()
         {
@@ -70,6 +79,24 @@ namespace FirstProject.MathildaRevenue
                 list.Add(int.Parse(reader.ReadLine()));
             }
             return list;
+        }
+        static void InitializeSeries()
+        {
+            static Series CreateSeries(List<int> list, int days)
+            {
+                var series = new Series();
+                if (list.Count < days) days = list.Count;
+                for (int i = 0; i < days; i++)
+                {
+                    series.Points.Add(new DataPoint(i + 1, list[i]));
+                }
+                series.ChartType = SeriesChartType.Column;
+                return series;
+            }
+            const int ChartLengthInDays = 365;
+            TotalMoneySeries = CreateSeries(TotalMoney, ChartLengthInDays);
+            CupcakesBasicSeries = CreateSeries(CupcakesBasic, ChartLengthInDays);
+            CupcakesDeluxSeries = CreateSeries(CupcakesDelux, ChartLengthInDays);
         }
     }
 }
