@@ -18,7 +18,6 @@ namespace FirstProject.MathildaRevenue
         public static List<int> CupcakesDelux { get; set; } = null;
         public static Series[] DataSeries { get; set; } = new Series[3];
 
-
         public static void LoadFromZip(string path)
         {
             // Extract from zip
