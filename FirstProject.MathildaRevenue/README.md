@@ -16,7 +16,7 @@ Arthur has a client, Matilda.  Matilda is 68 years old and sells cupcakes.  Mati
 Every so often Matilda sends Arthur three files:
 
 Basic.txt, Delux.txt, and Total.txt
-(Download examples here)
+(See example archive.zip here)
 
 Naturally, as any savvy business owner, Matilda wants to understand her business.  So she sends Arthur those files and wants to know: "How much money did I make last year? How much money do I make in a typical month?  Can you help, please? I do need your help,  I'm very busy baking cupcakes, and my arthritis flares up when I spend a whole day on the calculator."
 
