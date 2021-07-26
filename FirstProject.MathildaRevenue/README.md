@@ -8,7 +8,7 @@ After opening it will show you a chart which you can switch (a total of 12 chart
 Example photo:
 ![First weekly project example](https://i.imgur.com/yg9RvFd.png)
 
-**The project task goes below**
+**The project task goes below**:  
 You're working with an accountant named Arthur.
 
 Arthur has a client, Matilda.  Matilda is 68 years old and sells cupcakes.  Matilda is not a big fan of spreadsheets, accounting software, or computers in general really.
